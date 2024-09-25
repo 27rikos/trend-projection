@@ -1,365 +1,257 @@
 @extends('partials.main')
 @section('title', 'Dashboard')
 @section('main')
-    <div class="content-wrapper">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-            </ol>
-        </nav>
+    <div class="pc-content">
+        <!-- [ Main Content ] start -->
         <div class="row">
-            <div class="col-md-12 grid-margin transparent">
-                <div class="row">
-                    <div class="col-md-6 mb-4 stretch-card transparent">
-                        <div class="card card-tale">
-                            <div class="card-body">
-                                <p class="mb-4">Today’s Bookings</p>
-                                <p class="fs-30 mb-2">4006</p>
-                                <p>10.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4 stretch-card transparent">
-                        <div class="card card-dark-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Total Bookings</p>
-                                <p class="fs-30 mb-2">61344</p>
-                                <p>22.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                        <div class="card card-light-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Number of Meetings</p>
-                                <p class="fs-30 mb-2">34040</p>
-                                <p>2.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 stretch-card transparent">
-                        <div class="card card-light-danger">
-                            <div class="card-body">
-                                <p class="mb-4">Number of Clients</p>
-                                <p class="fs-30 mb-2">47033</p>
-                                <p>0.22% (30 days)</p>
-                            </div>
-                        </div>
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-grd-primary order-card">
+                    <div class="card-body">
+                        <h6 class="text-white">Orders Received</h6>
+                        <h2 class="text-end text-white"><i class="feather icon-shopping-cart float-start"></i><span>486</span>
+                        </h2>
+                        <p class="m-b-0">Completed Orders<span class="float-end">351</span></p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-grd-success order-card">
+                    <div class="card-body">
+                        <h6 class="text-white">Total Sales</h6>
+                        <h2 class="text-end text-white"><i class="feather icon-tag float-start"></i><span>1641</span>
+                        </h2>
+                        <p class="m-b-0">This Month<span class="float-end">213</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-grd-warning order-card">
+                    <div class="card-body">
+                        <h6 class="text-white">Revenue</h6>
+                        <h2 class="text-end text-white"><i class="feather icon-repeat float-start"></i><span>$42,562</span>
+                        </h2>
+                        <p class="m-b-0">This Month<span class="float-end">$5,032</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-grd-danger order-card">
+                    <div class="card-body">
+                        <h6 class="text-white">Total Profit</h6>
+                        <h2 class="text-end text-white"><i class="feather icon-award float-start"></i><span>$9,562</span>
+                        </h2>
+                        <p class="m-b-0">This Month<span class="float-end">$542</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>New Order From United States</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="world-map-markers" class="set-map" style="height:365px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-5">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between py-3">
+                        <h5>New Order From United States</h5>
+                        <div class="dropdown">
+                            <a class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none" href="#"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                    class="material-icons-two-tone f-18">more_vert</i></a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">View</a>
+                                <a class="dropdown-item" href="#">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="media align-items-center">
+                            <div class="avtar avtar-s bg-light-primary flex-shrink-0">
+                                <i class="ph ph-money f-20"></i>
+                            </div>
+                            <div class="media-body ms-3">
+                                <p class="mb-0 text-muted">Total Earnings</p>
+                                <h5 class="mb-0">$249.95</h5>
+                            </div>
+                        </div>
+                        <div id="earnings-users-chart"></div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-body">
-                        <p class="card-title">Order Details</p>
-                        <p class="font-weight-500">The total number of sessions within the date range. It
-                            is the period time a user is actively engaged with your website, page or app,
-                            etc</p>
-                        <div class="d-flex flex-wrap mb-5">
-                            <div class="me-5 mt-3">
-                                <p class="text-muted">Order value</p>
-                                <h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>
-                            </div>
-                            <div class="me-5 mt-3">
-                                <p class="text-muted">Orders</p>
-                                <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
-                            </div>
-                            <div class="me-5 mt-3">
-                                <p class="text-muted">Users</p>
-                                <h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>
-                            </div>
-                            <div class="mt-3">
-                                <p class="text-muted">Downloads</p>
-                                <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
-                            </div>
-                        </div>
-                        <canvas id="order-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <p class="card-title">Sales Report</p>
-                            <a href="#" class="text-info">View all</a>
-                        </div>
-                        <p class="font-weight-500">The total number of sessions within the date range. It
-                            is the period time a user is actively engaged with your website, page or app,
-                            etc</p>
-                        <div id="sales-chart-legend" class="chartjs-legend mt-4 mb-2"></div>
-                        <canvas id="sales-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card position-relative">
-                    <div class="card-body">
-                        <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2"
-                            data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                                            <div class="ml-xl-4 mt-3">
-                                                <p class="card-title">Detailed Reports</p>
-                                                <h1 class="text-primary">$34040</h1>
-                                                <h3 class="font-weight-500 mb-xl-4 text-primary">North
-                                                    America</h3>
-                                                <p class="mb-2 mb-xl-0">The total number of sessions within
-                                                    the date range. It is the period time a user is actively
-                                                    engaged with your website, page or app, etc</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 col-xl-9">
-                                            <div class="row">
-                                                <div class="col-md-6 border-right">
-                                                    <div class="table-responsive mb-3 mb-md-0 mt-3">
-                                                        <table class="table table-borderless report-table">
-                                                            <tr>
-                                                                <td class="text-muted">Illinois</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-primary"
-                                                                            role="progressbar" style="width: 70%"
-                                                                            aria-valuenow="70" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">713
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Washington</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-warning"
-                                                                            role="progressbar" style="width: 30%"
-                                                                            aria-valuenow="30" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">583
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Mississippi</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-danger"
-                                                                            role="progressbar" style="width: 95%"
-                                                                            aria-valuenow="95" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">924
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">California</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-info"
-                                                                            role="progressbar" style="width: 60%"
-                                                                            aria-valuenow="60" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">664
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Maryland</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-primary"
-                                                                            role="progressbar" style="width: 40%"
-                                                                            aria-valuenow="40" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">560
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Alaska</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-danger"
-                                                                            role="progressbar" style="width: 75%"
-                                                                            aria-valuenow="75" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">793
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <div class="daoughnutchart-wrapper">
-                                                        <canvas id="north-america-chart"></canvas>
-                                                    </div>
-                                                    <div id="north-america-chart-legend">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="media align-items-center">
+                                    <div class="avtar avtar-s bg-grd-primary flex-shrink-0">
+                                        <i class="ph ph-money f-20 text-white"></i>
                                     </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                                            <div class="ml-xl-4 mt-3">
-                                                <p class="card-title">Detailed Reports</p>
-                                                <h1 class="text-primary">$34040</h1>
-                                                <h3 class="font-weight-500 mb-xl-4 text-primary">North
-                                                    America</h3>
-                                                <p class="mb-2 mb-xl-0">The total number of sessions within
-                                                    the date range. It is the period time a user is actively
-                                                    engaged with your website, page or app, etc</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 col-xl-9">
-                                            <div class="row">
-                                                <div class="col-md-6 border-right">
-                                                    <div class="table-responsive mb-3 mb-md-0 mt-3">
-                                                        <table class="table table-borderless report-table">
-                                                            <tr>
-                                                                <td class="text-muted">Illinois</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-primary"
-                                                                            role="progressbar" style="width: 70%"
-                                                                            aria-valuenow="70" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">713
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Washington</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-warning"
-                                                                            role="progressbar" style="width: 30%"
-                                                                            aria-valuenow="30" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">583
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Mississippi</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-danger"
-                                                                            role="progressbar" style="width: 95%"
-                                                                            aria-valuenow="95" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">924
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">California</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-info"
-                                                                            role="progressbar" style="width: 60%"
-                                                                            aria-valuenow="60" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">664
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Maryland</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-primary"
-                                                                            role="progressbar" style="width: 40%"
-                                                                            aria-valuenow="40" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">560
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-muted">Alaska</td>
-                                                                <td class="w-100 px-0">
-                                                                    <div class="progress progress-md mx-4">
-                                                                        <div class="progress-bar bg-danger"
-                                                                            role="progressbar" style="width: 75%"
-                                                                            aria-valuenow="75" aria-valuemin="0"
-                                                                            aria-valuemax="100"></div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="font-weight-bold mb-0">793
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <div class="daoughnutchart-wrapper">
-                                                        <canvas id="south-america-chart"></canvas>
-                                                    </div>
-                                                    <div id="south-america-chart-legend"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="media-body ms-2">
+                                        <p class="mb-0 text-muted">Total Profit</p>
+                                        <h6 class="mb-0">$1,783</h6>
                                     </div>
                                 </div>
                             </div>
-                            <a class="carousel-control-prev" href="#detailedReports" role="button"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            </a>
-                            <a class="carousel-control-next" href="#detailedReports" role="button"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            </a>
+                            <div class="col-6">
+                                <div class="media align-items-center">
+                                    <div class="avtar avtar-s bg-grd-success flex-shrink-0">
+                                        <i class="ph ph-shopping-cart text-white f-20"></i>
+                                    </div>
+                                    <div class="media-body ms-2">
+                                        <p class="mb-0 text-muted">Product Sold</p>
+                                        <h6 class="mb-0">15,830</h6>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4 col-sm-6">
+                <div class="card statistics-card-1">
+                    <div class="card-body">
+                        <img src="../assets/images/widget/img-status-4.svg" alt="img" class="img-fluid img-bg">
+                        <div class="d-flex align-items-center justify-content-between mb-3 drp-div">
+                            <h6 class="mb-0">Daily Sales</h6>
+                            <div class="dropdown">
+                                <a class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none" href="#"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                        class="material-icons-two-tone f-18">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">View</a>
+                                    <a class="dropdown-item" href="#">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <h3 class="f-w-300 d-flex align-items-center m-b-0">$249.95</h3>
+                            <span class="badge bg-light-success ms-2">36%</span>
+                        </div>
+                        <p class="text-muted mb-2 text-sm mt-3">You made an extra 35,000 this daily</p>
+                        <div class="progress" style="height: 7px">
+                            <div class="progress-bar bg-brand-color-1" role="progressbar" style="width: 75%"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card statistics-card-1">
+                    <div class="card-body">
+                        <img src="../assets/images/widget/img-status-5.svg" alt="img" class="img-fluid img-bg">
+                        <div class="d-flex align-items-center justify-content-between mb-3 drp-div">
+                            <h6 class="mb-0">Monthly Sales</h6>
+                            <div class="dropdown">
+                                <a class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none" href="#"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                        class="material-icons-two-tone f-18">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">View</a>
+                                    <a class="dropdown-item" href="#">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <h3 class="f-w-300 d-flex align-items-center m-b-0">$249.95</h3>
+                            <span class="badge bg-light-primary ms-2">20%</span>
+                        </div>
+                        <p class="text-muted mb-2 text-sm mt-3">You made an extra 35,000 this Monthly</p>
+                        <div class="progress" style="height: 7px">
+                            <div class="progress-bar bg-brand-color-3" role="progressbar" style="width: 75%"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card statistics-card-1 bg-brand-color-1">
+                    <div class="card-body">
+                        <img src="../assets/images/widget/img-status-6.svg" alt="img" class="img-fluid img-bg">
+                        <div class="d-flex align-items-center justify-content-between mb-3 drp-div">
+                            <h6 class="mb-0 text-white">Yearly Sales</h6>
+                            <div class="dropdown">
+                                <a class="avtar avtar-xs btn-link-secondary bg-transparent text-white dropdown-toggle arrow-none"
+                                    href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false"><i
+                                        class="material-icons-two-tone bg-white f-18">more_vert</i></a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">View</a>
+                                    <a class="dropdown-item" href="#">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <h3 class="text-white f-w-300 d-flex align-items-center m-b-0">$249.95</h3>
+                        </div>
+                        <p class="text-white text-opacity-75 mb-2 text-sm mt-3">You made an extra 35,000 this Daily</p>
+                        <div class="progress" style="height: 7px">
+                            <div class="progress-bar bg-brand-color-3" role="progressbar" style="width: 75%"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Orders start -->
+            <div class="col-sm-12">
+                <div class="card table-card">
+                    <div class="card-header">
+                        <h5>Recent Orders</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Code</th>
+                                    <th>Customer</th>
+                                    <th>Purchased On</th>
+                                    <th>Status</th>
+                                    <th>Transaction ID</th>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/images/widget/p1.jpg" alt="prod img" class="img-fluid"></td>
+                                    <td>PNG002413</td>
+                                    <td>Jane Elliott</td>
+                                    <td>06-01-2017</td>
+                                    <td><span class="badge bg-primary">Shipping</span></td>
+                                    <td>#7234421</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/images/widget/p2.jpg" alt="prod img" class="img-fluid"></td>
+                                    <td>PNG002344</td>
+                                    <td>John Deo</td>
+                                    <td>05-01-2017</td>
+                                    <td><span class="badge bg-danger">Failed</span></td>
+                                    <td>#7234486</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/images/widget/p3.jpg" alt="prod img" class="img-fluid"></td>
+                                    <td>PNG002653</td>
+                                    <td>Eugine Turner</td>
+                                    <td>04-01-2017</td>
+                                    <td><span class="badge bg-success">Delivered</span></td>
+                                    <td>#7234417</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../assets/images/widget/p4.jpg" alt="prod img" class="img-fluid"></td>
+                                    <td>PNG002156</td>
+                                    <td>Jacqueline Howell</td>
+                                    <td>03-01-2017</td>
+                                    <td><span class="badge bg-warning">Pending</span></td>
+                                    <td>#7234454</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Orders end -->
         </div>
+        <!-- [ Main Content ] end -->
     </div>
 @endsection
