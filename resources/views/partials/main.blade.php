@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.0/css/responsive.bootstrap5.css">
     {{--  --}}
+    <script src="{{ asset('selectbox/dselect.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('selectbox/dselect.scss') }}">
 
 </head>
 <!-- [Head] end -->
@@ -78,7 +80,7 @@
                                 Obat</span></a>
                     </li>
                     <li class="pc-item">
-                        <a href="#" class="pc-link"><span class="pc-micon">
+                        <a href="{{ route('sales.index') }}" class="pc-link"><span class="pc-micon">
                                 <i class="fa-brands fa-shopify me-2"></i></span><span class="pc-mtext">Data
                                 Penjualan</span></a>
                     </li>
@@ -88,7 +90,7 @@
                                 Prediksi</span></a>
                     </li>
                     <li class="pc-item">
-                        <a href="#" class="pc-link"><span class="pc-micon">
+                        <a href="{{ route('report') }}" class="pc-link"><span class="pc-micon">
                                 <i class="fa-solid fa-paperclip me-2"></i></span><span
                                 class="pc-mtext">Laporan</span></a>
                     </li>
