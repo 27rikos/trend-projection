@@ -1,5 +1,5 @@
 @extends('partials.main')
-@section('title', 'Obat')
+@section('title', 'Laporan')
 @section('main')
     <div class="pc-content">
         <!-- [ breadcrumb ] start -->
@@ -9,14 +9,14 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title border-bottom pb-2 mb-2">
-                                <h4 class="mb-0">Data Obat</h4>
+                                <h4 class="mb-0">Laporan Penjualan Obat</h4>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('medicine.index') }}"><i
-                                            class="ph ph-house"></i></a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">Obat</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('report') }}"><i class="ph ph-house"></i></a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0)">Laporan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -32,12 +32,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="">
-                            <a href="{{ route('medicine.create') }}" class="btn btn-primary btn-sm"><i
-                                    class="fa-solid fa-plus me-1"></i>Tambah</a>
+                            <a href="#" class="btn btn-danger btn-sm"><i
+                                    class="fa-regular fa-file-pdf me-2"></i>PDF</a>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success text-light btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#import"><i class="fa-solid fa-file-import me-1"></i>
-                                Import
+                                data-bs-target="#import"><i class="fa-regular fa-file-excel me-2"></i>
+                                Export
                             </button>
 
                             <!-- Modal -->
@@ -50,8 +50,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form action="{{ route('import-medicine') }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form action="#" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <input type="file" class="form-input" name="file" accept=".xlsx,.csv">
@@ -73,33 +72,20 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Tanggal</th>
                                         <th>Obat</th>
-                                        <th>Jenis Obat</th>
-                                        <th>Satuan</th>
-                                        <th>Aksi</th>
+                                        <th>Jumlah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->obat }}</td>
+                                            <td>{{ $item->tanggal }}</td>
                                             <td>
-                                                {{ $item->jenis }}
+                                                {{ $item->obat }}
                                             </td>
-                                            <td>{{ $item->satuan }}</td>
-                                            <td>
-                                                <div class="d-flex gap-2">
-                                                    <a href="{{ route('medicine.edit', $item->id) }}"
-                                                        class="btn btn-info btn-sm">Edit</a>
-                                                    <form action="{{ route('medicine.destroy', $item->id) }}"
-                                                        method="post">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="btn btn-danger btn-sm">Hapus</button>
-                                                    </form>
-                                                </div>
-                                            </td>
+                                            <td>{{ $item->jumlah }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
