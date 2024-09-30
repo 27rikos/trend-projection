@@ -48,20 +48,25 @@
         <div class="auth-wrapper">
             <div class="auth-form">
                 <div class="card my-5">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h1 class="text-primary mb-4">SPP OBAT<i class="fa-solid fa-stethoscope"></i></h1>
+                    <form action="{{ route('auth') }}" method="post">
+                        @csrf
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h1 class="text-primary mb-4">SPP OBAT<i class="fa-solid fa-stethoscope"></i></h1>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="email" class="form-control" name="email" id="floatingInput"
+                                    placeholder="Email Address">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" class="form-control" name="password" id="floatingInput1"
+                                    placeholder="Password">
+                            </div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
                         </div>
-                        <div class="form-group mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="Email Address">
-                        </div>
-                        <div class="form-group mb-3">
-                            <input type="password" class="form-control" id="floatingInput1" placeholder="Password">
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-primary">Login</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

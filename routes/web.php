@@ -18,9 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::resource('medicine', ObatController::class);
-Route::get('/', [LoginController::class, 'index']);
-Route::post('import-medicine', [ObatController::class, 'imports'])->name('import-medicine');
-Route::resource('sales', SaleController::class);
-Route::get('report', [ReportController::class, 'index'])->name('report');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('medicine', ObatController::class);
+    Route::post('import-medicine', [ObatController::class, 'imports'])->name('import-medicine');
+    Route::resource('sales', SaleController::class);
+    Route::get('report', [ReportController::class, 'index'])->name('report');
+});
+
+Route::get('/', [LoginController::class, 'index'])->name('home')->middleware('guest');
+Route::post('authentication', [LoginController::class, 'auth'])->name('auth')->middleware('guest');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
