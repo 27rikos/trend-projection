@@ -42,7 +42,7 @@
     {{--  --}}
     <script src="{{ asset('selectbox/dselect.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('selectbox/dselect.scss') }}">
-
+    @stack('chart')
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -138,7 +138,7 @@
                                     style="max-height: calc(100vh - 225px)">
                                     <ul class="list-group list-group-flush w-100">
                                         <li class="list-group-item">
-                                            <a href="#" class="dropdown-item">
+                                            <a href="{{ route('logout') }}" class="dropdown-item">
                                                 <span class="d-flex align-items-center">
                                                     <i class="ph ph-power"></i>
                                                     <span>Logout</span>
