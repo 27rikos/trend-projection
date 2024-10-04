@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportSales;
 use App\Models\Obat;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaleController extends Controller
 {
@@ -78,5 +80,18 @@ class SaleController extends Controller
         $data = Sale::findOrFail($id);
         $data->delete();
         return redirect()->route('sales.index')->with('toast_success', 'Data Dihapus');
+    }
+
+    public function imports(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:xlsx,xls,csv|max:1020',
+        ], [
+            'file.required' => 'File belum diupload',
+            'file.mimes' => 'Format File harus Excel/CSV',
+            'file.max' => 'Ukuran File Max 1MB',
+        ]);
+        Excel::import(new ImportSales, $request->file);
+        return redirect()->route('sales.index')->with('toast_success', 'Data Berhasil Di import');
     }
 }
