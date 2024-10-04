@@ -84,16 +84,22 @@
                                 <i class="fa-brands fa-shopify me-2"></i></span><span class="pc-mtext">Data
                                 Penjualan</span></a>
                     </li>
-                    <li class="pc-item">
-                        <a href="#" class="pc-link"><span class="pc-micon">
-                                <i class="fa-solid fa-calculator me-2"></i></span><span class="pc-mtext">Hitung
-                                Prediksi</span></a>
+                    <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link"><span class="pc-micon">
+                                <i class="ph ph-tree-structure"></i> </span><span class="pc-mtext">Trend
+                                Projection</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item"><a class="pc-link" href="{{ route('train.index') }}">Model</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ route('predict.index') }}">Prediksi</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="pc-item">
+                    </li>
+                    {{-- <li class="pc-item">
                         <a href="{{ route('report') }}" class="pc-link"><span class="pc-micon">
                                 <i class="fa-solid fa-paperclip me-2"></i></span><span
                                 class="pc-mtext">Laporan</span></a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

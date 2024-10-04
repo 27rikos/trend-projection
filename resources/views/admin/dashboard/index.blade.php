@@ -74,88 +74,85 @@
                 var chart = new ApexCharts(document.querySelector("#chart"), options);
                 chart.render();
             </script>
-            <div id="spline"></div>
 
-            <!DOCTYPE html>
-            <html lang="en">
+            <!-- Monthly Sales Line Chart with Data Labels -->
+            <div id="monthlySalesChart" class="my-5"></div>
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Penjualan Obat per Bulan</title>
-                <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-            </head>
+            <script>
+                // Monthly Sales Line Chart with Data Labels
+                var monthlySalesData = @json($monthlySales);
 
-            <body>
+                // Process the data
+                var processedData = monthlySalesData.reduce((acc, item) => {
+                    if (!acc[item.year]) {
+                        acc[item.year] = Array(12).fill(null);
+                    }
+                    acc[item.year][item.month - 1] = item.total_quantity;
+                    return acc;
+                }, {});
 
-                <div id="chart"></div>
+                var years = Object.keys(processedData);
+                var series = years.map(year => ({
+                    name: year,
+                    data: processedData[year]
+                }));
 
-                <<script>
-                    // Data dummy untuk bulan
-                    var bulanPenjualan = [
-                        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                    ];
-
-                    // Data penjualan dummy yang menunjukkan fluktuasi (naik dan turun)
-                    var totalPenjualan2020 = [50, 70, 60, 80, 90, 100, 110, 95, 130, 120, 140, 130];
-                    var totalPenjualan2021 = [60, 80, 75, 90, 85, 110, 120, 115, 140, 160, 150, 170];
-                    var totalPenjualan2022 = [70, 90, 80, 110, 120, 105, 130, 140, 160, 155, 180, 175];
-                    var totalPenjualan2023 = [80, 110, 90, 130, 125, 140, 150, 160, 165, 190, 185, 200];
-
-                    // Menampilkan data dengan ApexCharts
-                    var options = {
-                        chart: {
-                            type: 'area', // Spline area chart
-                            zoom: {
-                                enabled: false
-                            }
-                        },
-                        series: [{
-                                name: '2020',
-                                data: totalPenjualan2020
-                            },
-                            {
-                                name: '2021',
-                                data: totalPenjualan2021
-                            },
-                            {
-                                name: '2022',
-                                data: totalPenjualan2022
-                            },
-                            {
-                                name: '2023',
-                                data: totalPenjualan2023
-                            }
-                        ],
-                        xaxis: {
-                            categories: bulanPenjualan,
-                            title: {
-                                text: 'Bulan'
-                            }
-                        },
-                        yaxis: {
-                            title: {
-                                text: 'Jumlah Penjualan'
-                            }
-                        },
-                        title: {
-                            text: 'Penjualan Obat per Bulan (2020-2023)',
-                            align: 'center'
-                        },
-                        fill: {
-                            opacity: 0.5 // Opacity untuk area chart
+                var monthlySalesOptions = {
+                    chart: {
+                        type: 'line',
+                        height: 350,
+                        zoom: {
+                            enabled: false
                         }
-                    };
+                    },
+                    series: series,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function(val) {
+                            return val !== null ? val.toFixed(0) : '';
+                        },
+                        offsetY: -5
+                    },
+                    stroke: {
+                        width: [2, 2, 2, 2],
+                        curve: 'straight'
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        title: {
+                            text: 'Bulan'
+                        }
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'Total Penjualan'
+                        }
+                    },
+                    title: {
+                        text: 'Penjualan Bulanan per Tahun',
+                        align: 'center'
+                    },
+                    legend: {
+                        position: 'top'
+                    },
+                    markers: {
+                        size: 5,
+                        hover: {
+                            size: 7
+                        }
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function(val) {
+                                return val !== null ? val.toFixed(0) : 'No data';
+                            }
+                        }
+                    }
+                };
 
-                    var chart = new ApexCharts(document.querySelector("#spline"), options);
-                    chart.render();
-                </script>
-
-            </body>
-
-            </html>
-
+                var monthlySalesChart = new ApexCharts(document.querySelector("#monthlySalesChart"), monthlySalesOptions);
+                monthlySalesChart.render();
+            </script>
         </div>
         <!-- [ Main Content ] end -->
     </div>
