@@ -37,6 +37,8 @@
                     </div>
                 </div>
             </div>
+            <!-- Monthly Sales Line Chart with Data Labels -->
+            <div id="monthlySalesChart" class="my-5"></div>
             <!-- Recent Orders end -->
             <div id="chart" class="my-5"></div>
 
@@ -75,8 +77,7 @@
                 chart.render();
             </script>
 
-            <!-- Monthly Sales Line Chart with Data Labels -->
-            <div id="monthlySalesChart" class="my-5"></div>
+
 
             <script>
                 // Monthly Sales Line Chart with Data Labels

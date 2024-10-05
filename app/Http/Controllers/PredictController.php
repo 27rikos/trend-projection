@@ -34,7 +34,6 @@ class PredictController extends Controller
         $obat = $request->obat;
         $tanggal = Carbon::parse($request->tanggal);
         $tahunPrediksi = $tanggal->year;
-        $tahunSebelumnya = $tahunPrediksi - 1;
 
         // Mendapatkan data penjualan obat berdasarkan nama obat yang dipilih
         $data = Train::where('obat', $obat)->orderBy('tanggal')->get();
@@ -58,17 +57,9 @@ class PredictController extends Controller
         $slope = ($n * $sumXY - $sumX * $sumY) / ($n * $sumX2 - $sumX * $sumX);
         $intercept = ($sumY - $slope * $sumX) / $n;
 
-        // Ambil data aktual untuk tahun prediksi dan tahun sebelumnya
+        // Ambil data aktual hanya untuk tahun prediksi
         $actualDataPrediksi = Train::where('obat', $obat)
             ->whereYear('tanggal', $tahunPrediksi)
-            ->orderBy('tanggal')
-            ->get()
-            ->keyBy(function ($item) {
-                return Carbon::parse($item->tanggal)->format('F');
-            });
-
-        $actualDataSebelumnya = Train::where('obat', $obat)
-            ->whereYear('tanggal', $tahunSebelumnya)
             ->orderBy('tanggal')
             ->get()
             ->keyBy(function ($item) {
@@ -85,15 +76,10 @@ class PredictController extends Controller
             $bulanTahun = $currentDate->format('F Y');
             $bulan = $currentDate->format('F');
 
-            // Cek data aktual tahun prediksi, jika tidak ada gunakan data tahun sebelumnya
-            if ($actualDataPrediksi->has($bulan)) {
-                $aktualY = $actualDataPrediksi[$bulan]->penjualan_y;
-            } elseif ($actualDataSebelumnya->has($bulan)) {
-                $aktualY = $actualDataSebelumnya[$bulan]->penjualan_y;
-            } else {
-                $aktualY = null;
-            }
+            // Cek data aktual untuk bulan tersebut di tahun prediksi
+            $aktualY = $actualDataPrediksi->has($bulan) ? $actualDataPrediksi[$bulan]->penjualan_y : null;
 
+            // Simpan prediksi ke database
             Prediction::create([
                 'obat' => $obat,
                 'bulan' => $bulanTahun,
@@ -106,5 +92,4 @@ class PredictController extends Controller
         // Redirect ke halaman index untuk menampilkan hasil prediksi
         return redirect()->route('predict.index')->with('success', 'Prediksi berhasil dihitung dan disimpan.');
     }
-
 }
