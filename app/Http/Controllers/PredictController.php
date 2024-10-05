@@ -38,22 +38,22 @@ class PredictController extends Controller
         // Mendapatkan data penjualan obat berdasarkan nama obat yang dipilih
         $data = Train::where('obat', $obat)->orderBy('tanggal')->get();
 
-        // Jika tidak ada data, kembalikan view dengan pesan error
+        // Jika tidak ada data, kembalikan dengan pesan error
         if ($data->isEmpty()) {
             return redirect()->back()->with('error', 'Data penjualan untuk obat ini tidak ditemukan.');
         }
 
-        // Truncate tabel prediksi sebelum menyimpan data baru
+        // Kosongkan tabel prediksi sebelum menyimpan data baru
         Prediction::truncate();
 
-        // Menghitung komponen untuk trend projection
+        // Menghitung slope dan intercept berdasarkan data yang ada
         $n = $data->count();
         $sumX = $data->sum('periode_x');
         $sumY = $data->sum('penjualan_y');
         $sumXY = $data->sum('xy');
         $sumX2 = $data->sum('x2');
 
-        // Menghitung slope (m) dan intercept (b)
+        // Menghitung slope dan intercept
         $slope = ($n * $sumXY - $sumX * $sumY) / ($n * $sumX2 - $sumX * $sumX);
         $intercept = ($sumY - $slope * $sumX) / $n;
 
@@ -66,12 +66,18 @@ class PredictController extends Controller
                 return Carbon::parse($item->tanggal)->format('F');
             });
 
+        // Mengambil periode X terakhir dari data aktual
         $lastPeriodeX = $data->last()->periode_x;
 
+        // Loop untuk memprediksi penjualan untuk 12 bulan ke depan
         for ($month = 1; $month <= 12; $month++) {
+            // Menghitung periode X yang bertambah setiap bulan dari periode terakhir
             $currentPeriodeX = $lastPeriodeX + $month;
+
+            // Menghitung prediksi penjualan Y
             $prediksiY = $intercept + $slope * $currentPeriodeX;
 
+            // Mengatur tanggal untuk bulan saat ini
             $currentDate = Carbon::createFromDate($tahunPrediksi, $month, 1);
             $bulanTahun = $currentDate->format('F Y');
             $bulan = $currentDate->format('F');
@@ -92,4 +98,5 @@ class PredictController extends Controller
         // Redirect ke halaman index untuk menampilkan hasil prediksi
         return redirect()->route('predict.index')->with('success', 'Prediksi berhasil dihitung dan disimpan.');
     }
+
 }
