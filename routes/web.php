@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('sales', SaleController::class);
     // Route::get('report', [ReportController::class, 'index'])->name('report');
     Route::post('import-sales', [SaleController::class, 'imports'])->name('import-sales');
+    Route::get('drop', [SaleController::class, 'reset'])->name('reset');
 
     // Training route
     Route::get('train-data', [TrainingController::class, 'index'])->name('train.index');

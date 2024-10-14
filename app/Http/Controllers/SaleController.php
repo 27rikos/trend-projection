@@ -94,4 +94,10 @@ class SaleController extends Controller
         Excel::import(new ImportSales, $request->file);
         return redirect()->route('sales.index')->with('toast_success', 'Data Berhasil Di import');
     }
+
+    public function reset()
+    {
+        Sale::truncate();
+        return back()->with('toast_success', 'Data Dihapus');
+    }
 }

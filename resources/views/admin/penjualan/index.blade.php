@@ -32,14 +32,19 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="">
-                            <a href="{{ route('sales.create') }}" class="btn btn-primary btn-sm"><i
-                                    class="fa-solid fa-plus me-1"></i>Tambah</a>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success text-light btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#import"><i class="fa-solid fa-file-import me-1"></i>
-                                Import
-                            </button>
-
+                            <div class=" d-flex justify-content-between">
+                                <div class="">
+                                    <a href="{{ route('sales.create') }}" class="btn btn-primary btn-sm"><i
+                                            class="fa-solid fa-plus me-1"></i>Tambah</a>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success text-light btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#import"><i class="fa-solid fa-file-import me-1"></i>
+                                        Import
+                                    </button>
+                                </div>
+                                <a href="{{ route('reset') }}" class="btn btn-danger btn-sm"><i
+                                        class="fa-solid fa-trash-can me-1"></i>Drop</a>
+                            </div>
                             <!-- Modal -->
                             <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
