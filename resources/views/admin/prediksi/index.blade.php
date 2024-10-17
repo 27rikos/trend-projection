@@ -59,7 +59,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="col-md-6">
                                 <form action="{{ route('predict.store') }}" method="post">
                                     @csrf
@@ -74,7 +73,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="">Pilih Tahun Prediksi</label>
-                                        <input type="date" class="form-control" name="tanggal">
+                                        <input type="number" class="form-control" name="tanggal">
                                     </div>
                                     <button class="btn btn-primary btn-sm w-100" type="submit">Predict</button>
                                 </form>
