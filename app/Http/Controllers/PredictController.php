@@ -27,12 +27,11 @@ class PredictController extends Controller
     {
         $request->validate([
             'obat' => 'required|string',
-            'tanggal' => 'required|date',
+            'tahun' => 'required|integer|min:1900|max:' . (date('Y') + 100),
         ]);
 
         $obat = $request->obat;
-        $tanggal = Carbon::parse($request->tanggal);
-        $tahunPrediksi = $tanggal->year;
+        $tahunPrediksi = $request->tahun;
         $tahunSebelumnya = $tahunPrediksi - 1;
         $duaTahunSebelumnya = $tahunPrediksi - 2;
 
