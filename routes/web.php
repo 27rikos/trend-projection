@@ -33,9 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data-trend', [TrainingController::class, 'calculate'])->name('train.store');
     // Predict route
     Route::get('predict', [PredictController::class, 'index'])->name('predict.index');
-    Route::post('predict-data', [PredictController::class, 'predicted'])->name('predict.store');
-
+    Route::post('predict-data', [PredictController::class, 'predict'])->name('predict.store');
 });
+
 Route::get('/', [LoginController::class, 'index'])->name('home')->middleware('guest');
 Route::post('authentication', [LoginController::class, 'auth'])->name('auth')->middleware('guest');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');

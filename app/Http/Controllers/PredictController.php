@@ -15,15 +15,16 @@ class PredictController extends Controller
         $drugs = Obat::all();
         // Mengambil semua data prediksi dari database
         $prediksiData = Prediction::all();
-
+        $obat = Prediction::value('obat');
         // Kembalikan data prediksi ke view tanpa data obat
         return view('admin.prediksi.index', [
             'prediksiData' => $prediksiData,
             'drugs' => $drugs,
+            'obat' => $obat,
         ]);
     }
 
-    public function predicted(Request $request)
+    public function predict(Request $request)
     {
         $request->validate([
             'obat' => 'required|string',

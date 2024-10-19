@@ -9,4 +9,5 @@ class Prediction extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'predictions';
 }

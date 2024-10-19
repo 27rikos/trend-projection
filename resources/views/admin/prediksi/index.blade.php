@@ -4,6 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endpush
 @section('main')
+
     <div class="pc-content">
         <!-- [ breadcrumb ] start -->
         <div class="page-header">
@@ -12,7 +13,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title border-bottom pb-2 mb-2">
-                                <h4 class="mb-0">Prediksi Penjualan Obat</h4>
+                                <h4 class="mb-0">Prediksi Penjualan Obat {{ $obat }}</h4>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -26,8 +27,20 @@
                 </div>
             </div>
         </div>
-        <!-- [ breadcrumb ] end -->
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         <div class="row">
             <div class="col-sm-12">
@@ -39,7 +52,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="" class="mb-1">Hasil Perhitungan Prediksi Penjualan Obat</label>
+                                <label for="" class="mb-1">Hasil Perhitungan Prediksi Penjualan Obat
+                                </label>
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -73,14 +87,14 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="">Pilih Tahun Prediksi</label>
-                                        <input type="number" class="form-control" name="tanggal">
+                                        <input type="number" class="form-control" name="tahun">
                                     </div>
                                     <button class="btn btn-primary btn-sm w-100" type="submit">Predict</button>
                                 </form>
                             </div>
                         </div>
                         <div id="chart" class="my-5"></div>
-                        <h6>Perhitungan APE</h6>
+                        <h6>Perhitungan APE {{ $obat }}</h6>
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -118,7 +132,7 @@
                         @php
                             $mape = $count > 0 ? $totalApe / $count : 0;
                         @endphp
-                        <h6>Mean Absolute Percentage Error (MAPE): {{ number_format($mape, 2) }}%</h6>
+                        <h6>Mean Absolute Percentage Error (MAPE) {{ $obat }}: {{ number_format($mape, 2) }}%</h6>
                     </div>
                 </div>
             </div>
@@ -133,14 +147,14 @@
 
         var options = {
             series: [{
-                name: 'Penjualan Aktual',
+                name: 'Penjualan Aktual {{ $obat }}',
                 data: [
                     @foreach ($prediksiData as $row)
                         {{ isset($row['aktual_y']) ? $row['aktual_y'] : 'null' }},
                     @endforeach
                 ]
             }, {
-                name: 'Prediksi Penjualan',
+                name: 'Prediksi Penjualan {{ $obat }}',
                 data: [
                     @foreach ($prediksiData as $row)
                         {{ $row['prediksi_f'] }},
@@ -161,7 +175,7 @@
                 curve: 'smooth'
             },
             title: {
-                text: 'Hasil Prediksi Penjualan Obat',
+                text: 'Hasil Prediksi Penjualan Obat {{ $obat }}',
                 align: 'left'
             },
             xaxis: {
@@ -169,7 +183,7 @@
             },
             yaxis: {
                 title: {
-                    text: 'Jumlah Penjualan'
+                    text: 'Jumlah Penjualan {{ $obat }}'
                 }
             },
             tooltip: {
