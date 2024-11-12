@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use App\Models\Prediction;
 use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $obat = Obat::count();
+        $drugs = Obat::count();
         $type = Obat::distinct('jenis')->count('jenis');
         $sale = Sale::count();
         $obats = Obat::select('jenis', DB::raw('COUNT(*) as total_jumlah'))
@@ -23,7 +24,8 @@ class DashboardController extends Controller
             ->orderBy('year')
             ->orderBy('month')
             ->get();
-
-        return view('admin.dashboard.index', compact('obat', 'type', 'sale', 'obats', 'monthlySales'));
+        $prediksiData = Prediction::all();
+        $predict = Prediction::value('obat');
+        return view('admin.dashboard.index', compact('predict', 'prediksiData', 'obats', 'type', 'sale', 'drugs', 'monthlySales'));
     }
 }

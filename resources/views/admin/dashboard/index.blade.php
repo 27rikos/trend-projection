@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <h6 class="text-white">Jumlah Obat</h6>
                         <h2 class="text-end text-white"><i
-                                class="fa-solid fa-pills float-start"></i><span>{{ $obat }}</span>
+                                class="fa-solid fa-pills float-start"></i><span>{{ $drugs }}</span>
                         </h2>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
             <div class="col-md-6 col-xl-3">
                 <div class="card bg-grd-success order-card">
                     <div class="card-body">
-                        <h6 class="text-white">Total Penjualan</h6>
+                        <h6 class="text-white">Periode Penjualan</h6>
                         <h2 class="text-end text-white"><i
                                 class="fa-solid fa-cart-shopping float-start"></i><span>{{ $sale }}</span>
                         </h2>
@@ -41,7 +41,7 @@
             <div id="monthlySalesChart" class="my-5"></div>
             <!-- Recent Orders end -->
             <div id="chart" class="my-5"></div>
-
+            <div id="chart-predict" class="my-5"></div>
             <script>
                 // Data dari controller, diambil langsung dalam bentuk PHP array dan disiapkan untuk JavaScript
                 var jenisObat = @json($obats->pluck('jenis'));
@@ -156,5 +156,62 @@
             </script>
         </div>
         <!-- [ Main Content ] end -->
+        <script>
+            // Ambil data prediksi dalam format JSON
+            var prediksiData = @json($prediksiData);
+
+            // Proses data untuk chart
+            var aktualData = prediksiData.map(item => item.aktual_y ?? null); // Handle null values
+            var prediksiDataPoints = prediksiData.map(item => item.prediksi_f);
+
+            var options = {
+                series: [{
+                        name: 'Penjualan Aktual {{ $predict }}',
+                        data: aktualData
+                    },
+                    {
+                        name: 'Prediksi Penjualan {{ $predict }}',
+                        data: prediksiDataPoints
+                    }
+                ],
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                dataLabels: {
+                    enabled: true
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                title: {
+                    text: 'Hasil Prediksi Penjualan Obat {{ $predict }}',
+                    align: 'left'
+                },
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+                },
+                yaxis: {
+                    title: {
+                        text: 'Jumlah Penjualan {{ $predict }}'
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    y: {
+                        formatter: function(val) {
+                            return val + " unit";
+                        }
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart-predict"), options);
+            chart.render();
+        </script>
+
     </div>
 @endsection
