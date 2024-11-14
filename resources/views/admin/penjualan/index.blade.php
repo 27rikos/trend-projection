@@ -88,7 +88,7 @@
                                     @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('F') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('F Y') }}</td>
                                             <td>
                                                 {{ $item->obat }}
                                             </td>
