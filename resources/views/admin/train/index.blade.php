@@ -50,7 +50,7 @@
                             <tbody>
                                 @forelse ($data as $item)
                                     <tr>
-                                        <td>{{ $item->tanggal }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('F') }}</td>
                                         <td>{{ $item->obat }}</td>
                                         <td>{{ $item->penjualan_y }}</td>
                                         <td>{{ $item->periode_x }}</td>
